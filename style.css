@@ -49,14 +49,19 @@ body {
 }
 
 #display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     height: 100px;
     margin-top: 16px;
     margin-bottom: 16px;
+    padding-left: 4px;
+    padding-right: 4px;
     border: 8px solid black;
     border-radius: 5px;
     background-color: #97AB60;
     font-family: Digital;
-    font-size: 75px;
+    font-size: 100px;
 }
 
 #buttons {
@@ -85,4 +90,15 @@ body {
 
 .button.ac {
     background-color: #AEF359;
+}
+
+.number-display {
+    height: 80px;
+}
+
+#operator {
+    height: 40px;
+    align-self: flex-start;
+    font-size: 40px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
