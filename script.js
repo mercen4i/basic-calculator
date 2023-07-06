@@ -61,31 +61,45 @@ function enableNumTwoInput() {
     });
 }
 
+function disableNumTwoInput() {
+    numberButtons.forEach(numberButton => {
+        numberButton.removeEventListener('click', inputNumTwo);
+    })
+}
+
+function inputOperator(e) {
+    if(e.target['id'] === "add") {
+        operatorDisplay.textContent = "+";
+        operator = "+";
+    }
+    if(e.target['id'] === "subtract") {
+        operatorDisplay.textContent = "-";
+        operator = "-";
+    }
+    if(e.target['id'] === "multiply") {
+        operatorDisplay.textContent = "×";
+        operator = "*";
+    }
+    if(e.target['id'] === "divide") {
+        operatorDisplay.textContent = "÷";
+        operator = "/";
+    }
+    if(operatorIsClicked == false) {
+        disableNumOneInput();
+        enableNumTwoInput();
+        operatorIsClicked = true;
+    }
+}
+
 function enableOperatorInput() {
     operatorButtons.forEach(operatorButton => {
-        operatorButton.addEventListener('click', () => {
-            if(operatorButton['id'] === "add") {
-                operatorDisplay.textContent = "+";
-                operator = "+";
-            }
-            if(operatorButton['id'] === "subtract") {
-                operatorDisplay.textContent = "-";
-                operator = "-";
-            }
-            if(operatorButton['id'] === "multiply") {
-                operatorDisplay.textContent = "×";
-                operator = "*";
-            }
-            if(operatorButton['id'] === "divide") {
-                operatorDisplay.textContent = "÷";
-                operator = "/";
-            }
-            if(operatorIsClicked == false) {
-                disableNumOneInput();
-                enableNumTwoInput();
-                operatorIsClicked = true;
-            }
-        });
+        operatorButton.addEventListener('click', inputOperator);
+    });
+}
+
+function disableOperatorInput() {
+    operatorButtons.forEach(operatorButton => {
+        operatorButton.removeEventListener('click', inputOperator);
     });
 }
 
@@ -97,10 +111,27 @@ function enableEqualsButton() {
     });
 }
 
+function enableClearButton() {
+    clearButton.addEventListener('click', () => {
+        numberDisplay.textContent = "";
+        operatorDisplay.textContent = "";
+        num1 = "";
+        num2 = "";
+        operator = "";
+        numberIsClicked = false;
+        operatorIsClicked = false;
+        equalsIsClicked = false;
+        disableNumTwoInput();
+        disableOperatorInput();
+        enableNumOneInput();
+    });
+}
+
 const display = document.querySelector('#display');
 const numberButtons = document.querySelectorAll('.button.number');
 const operatorButtons = document.querySelectorAll('.button.operator');
 const equalsButton = document.querySelector('#equals');
+const clearButton = document.querySelector('#clear');
 
 const numberDisplay = document.createElement('div');
 numberDisplay.classList.add('number-display');
@@ -116,3 +147,4 @@ let operatorIsClicked = false;
 let equalsIsClicked = false;
 
 enableNumOneInput();
+enableClearButton();
