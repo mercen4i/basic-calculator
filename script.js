@@ -113,26 +113,31 @@ function disableOperatorInput() {
     });
 }
 
+function inputEquals() {
+    if(num1 != "" && num2 == "") {
+        num1 = result;
+        numberDisplay.textContent = num1;
+        operatorDisplay.textContent = "=";
+    }
+    else if(equalsIsClicked == false) {
+        result = operate(num1, num2, operator);
+        numberDisplay.textContent = result;
+        operatorDisplay.textContent = "=";
+        num1 = result;
+        num2 = "";
+        operator = "";
+        operatorIsClicked = false;
+        numberIsClicked = false;
+        equalsIsClicked = true;
+    }
+}
+
 function enableEqualsButton() {
-    equalsButton.addEventListener('click', () => {
-        if(num1 != "" && num2 == "") {
-            num1 = result;
-            numberDisplay.textContent = num1;
-            operatorDisplay.textContent = "=";
-        }
-        else if(equalsIsClicked == false) {
-            result = operate(num1, num2, operator);
-            numberDisplay.textContent = result;
-            operatorDisplay.textContent = "=";
-            num1 = result;
-            num2 = "";
-            operator = "";
-            operatorIsClicked = false;
-            numberIsClicked = false;
-            equalsIsClicked = true;
-        }
-        
-    });
+    equalsButton.addEventListener('click', inputEquals);
+}
+
+function disableEqualsButton() {
+    equalsButton.removeEventListener('click', inputEquals);
 }
 
 function enableClearButton() {
@@ -147,6 +152,7 @@ function enableClearButton() {
         equalsIsClicked = false;
         disableNumTwoInput();
         disableOperatorInput();
+        disableEqualsButton();
         enableNumOneInput();
     });
 }
