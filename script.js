@@ -22,10 +22,17 @@ function operate(num1, num2, operator) {
 }
 
 function inputNumOne(e) {
-    numberDisplay.textContent += e.target['id'];
-    num1 += e.target['id'];
-    enableOperatorInput();
-    e.preventDefault();
+    if(e.target['id'] == "0" && numberDisplay.textContent == "0") {
+        numberDisplay.textContent = "0";
+    } else {
+        if(numberDisplay.textContent == "0") {
+            numberDisplay.textContent = "";
+            num1 = "";
+        }
+        numberDisplay.textContent += e.target['id'];
+        num1 += e.target['id'];
+        enableOperatorInput();
+    }
 }
 
 function enableNumOneInput() {
@@ -47,8 +54,17 @@ function inputNumTwo(e) {
         numberIsClicked = true;
     } 
     if(numberIsClicked == true) {
-        numberDisplay.textContent += e.target['id'];
-        num2 += e.target['id'];
+        if(e.target['id'] == "0" && numberDisplay.textContent == "0") {
+            numberDisplay.textContent = "0";
+        } else {
+            if(numberDisplay.textContent == "0") {
+                numberDisplay.textContent = "";
+                num2 = "";
+            }
+            numberDisplay.textContent += e.target['id'];
+            num2 += e.target['id'];
+            enableOperatorInput();
+        }
     }
     if(equalsIsClicked == false) {
         enableEqualsButton();
@@ -118,8 +134,7 @@ function inputEquals() {
         num1 = result;
         numberDisplay.textContent = num1;
         operatorDisplay.textContent = "=";
-    }
-    else if(equalsIsClicked == false) {
+    } else if(equalsIsClicked == false) {
         result = operate(num1, num2, operator);
         numberDisplay.textContent = result;
         operatorDisplay.textContent = "=";
@@ -162,6 +177,7 @@ const numberButtons = document.querySelectorAll('.button.number');
 const operatorButtons = document.querySelectorAll('.button.operator');
 const equalsButton = document.querySelector('#equals');
 const clearButton = document.querySelector('#clear');
+const answerButton = document.querySelector('#answer');
 
 const numberDisplay = document.createElement('div');
 numberDisplay.classList.add('number-display');
@@ -172,6 +188,7 @@ const operatorDisplay = document.querySelector('#operator');
 let num1 = "";
 let num2 = "";
 let operator = "";
+let result = "";
 let numberIsClicked = false;
 let operatorIsClicked = false;
 let equalsIsClicked = false;
