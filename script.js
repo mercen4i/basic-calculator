@@ -41,6 +41,7 @@ function disableNumOneInput() {
 }
 
 function inputNumTwo(e) {
+    operatorIsClicked = false;
     if(numberIsClicked == false) {
         numberDisplay.textContent = "";
         numberIsClicked = true;
@@ -51,7 +52,6 @@ function inputNumTwo(e) {
     }
     if(equalsIsClicked == false) {
         enableEqualsButton();
-        equalsIsClicked = true;
     }
 }
 
@@ -68,6 +68,7 @@ function disableNumTwoInput() {
 }
 
 function inputOperator(e) {
+    let previousOperator = operator;
     if(e.target['id'] === "add") {
         operatorDisplay.textContent = "+";
         operator = "+";
@@ -88,6 +89,15 @@ function inputOperator(e) {
         disableNumOneInput();
         enableNumTwoInput();
         operatorIsClicked = true;
+        equalsIsClicked = false;
+    } 
+    if(operatorIsClicked == true && equalsIsClicked == false && numberIsClicked == true) {
+        result = operate(num1, num2, previousOperator);
+        numberDisplay.textContent = result;
+        num1 = result;
+        num2 = "";
+        operatorIsClicked = false;
+        numberIsClicked = false;
     }
 }
 
@@ -105,9 +115,23 @@ function disableOperatorInput() {
 
 function enableEqualsButton() {
     equalsButton.addEventListener('click', () => {
-        result = operate(num1, num2, operator);
-        numberDisplay.textContent = result;
-        operatorDisplay.textContent = "=";
+        if(num1 != "" && num2 == "") {
+            num1 = result;
+            numberDisplay.textContent = num1;
+            operatorDisplay.textContent = "=";
+        }
+        else if(equalsIsClicked == false) {
+            result = operate(num1, num2, operator);
+            numberDisplay.textContent = result;
+            operatorDisplay.textContent = "=";
+            num1 = result;
+            num2 = "";
+            operator = "";
+            operatorIsClicked = false;
+            numberIsClicked = false;
+            equalsIsClicked = true;
+        }
+        
     });
 }
 
