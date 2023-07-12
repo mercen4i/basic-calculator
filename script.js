@@ -155,7 +155,15 @@ function disableOperatorInput() {
 }
 
 function inputEquals() {
-    if(num1 != "" && num2 == "") {
+    if(operatorIsClicked == true) {
+        num1 = "";
+        operator = "";
+        operatorDisplay.textContent = "=";
+        operatorIsClicked = false;
+        equalsIsClicked = true;
+        disableNumTwoInput();
+        enableNumOneInput();
+    } else if(num1 != "" && num2 == "") {
         num1 = result;
         operator = "";
         numberDisplay.textContent = num1;
