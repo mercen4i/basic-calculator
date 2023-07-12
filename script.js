@@ -30,6 +30,11 @@ function cube(num1) {
 }
 
 function inputNumOne(e) {
+    if(operatorIsClicked == false && equalsIsClicked == true) {
+        numberDisplay.textContent = "";
+        operatorDisplay.textContent = "";
+        equalsIsClicked = false;
+    }
     if(e.target['id'] == "0" && numberDisplay.textContent == "0") {
         numberDisplay.textContent = "0";
     } else {
@@ -112,6 +117,13 @@ function inputOperator(e) {
         operatorDisplay.textContent = "÷";
         operator = "/";
     }
+    if(operatorIsClicked == false && equalsIsClicked == true) {
+        num1 = result;
+        disableNumOneInput();
+        enableNumTwoInput();
+        operatorIsClicked = true;
+        equalsIsClicked = false;
+    }
     if(operatorIsClicked == false) {
         disableNumOneInput();
         enableNumTwoInput();
@@ -145,18 +157,21 @@ function disableOperatorInput() {
 function inputEquals() {
     if(num1 != "" && num2 == "") {
         num1 = result;
+        operator = "";
         numberDisplay.textContent = num1;
         operatorDisplay.textContent = "=";
     } else if(equalsIsClicked == false) {
         result = operate(num1, num2, operator);
         numberDisplay.textContent = result;
         operatorDisplay.textContent = "=";
-        num1 = result;
+        num1 = "";
         num2 = "";
         operator = "";
         operatorIsClicked = false;
         numberIsClicked = false;
         equalsIsClicked = true;
+        disableNumTwoInput();
+        enableNumOneInput();
     }
 }
 
