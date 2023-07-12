@@ -21,6 +21,14 @@ function operate(num1, num2, operator) {
     else if (operator === "/") return divide(parseFloat(num1), parseFloat(num2));
 }
 
+function square(num1) {
+    return num1 * num1;
+}
+
+function cube(num1) {
+    return num1 * num1 * num1;
+}
+
 function inputNumOne(e) {
     if(e.target['id'] == "0" && numberDisplay.textContent == "0") {
         numberDisplay.textContent = "0";
@@ -32,6 +40,8 @@ function inputNumOne(e) {
         numberDisplay.textContent += e.target['id'];
         num1 += e.target['id'];
         enableOperatorInput();
+        enableSquareButton();
+        enableCubeButton();
     }
 }
 
@@ -205,6 +215,44 @@ function disableDecimalButton() {
     decimalButton.removeEventListener('click', inputDecimalButton);
 }
 
+function inputSquare() {
+    if(numberIsClicked == true) {
+        num2 = square(num2);
+        numberDisplay.textContent = num2;
+    } else {
+        result = square(num1);
+        num1 = result;
+        numberDisplay.textContent = result;
+    }
+}
+
+function enableSquareButton() {
+    squareButton.addEventListener('click', inputSquare);
+}
+
+function disableSquareButton() {
+    squareButton.removeEventListener('click', inputSquare);
+}
+
+function inputCube() {
+    if(numberIsClicked == true) {
+        num2 = cube(num2);
+        numberDisplay.textContent = num2;
+    } else {
+        result = cube(num1);
+        num1 = result;
+        numberDisplay.textContent = result;
+    }
+}
+
+function enableCubeButton() {
+    cubeButton.addEventListener('click', inputCube);
+}
+
+function disableCubeButton() {
+    cubeButton.removeEventListener('click', inputCube);
+}
+
 const display = document.querySelector('#display');
 const numberButtons = document.querySelectorAll('.button.number');
 const operatorButtons = document.querySelectorAll('.button.operator');
@@ -212,6 +260,8 @@ const equalsButton = document.querySelector('#equals');
 const clearButton = document.querySelector('#clear');
 const answerButton = document.querySelector('#answer');
 const decimalButton = document.querySelector('#decimal');
+const squareButton = document.querySelector('#square');
+const cubeButton = document.querySelector('#cube');
 
 const numberDisplay = document.createElement('div');
 numberDisplay.classList.add('number-display');
