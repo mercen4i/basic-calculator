@@ -163,8 +163,9 @@ function inputEquals() {
         equalsIsClicked = true;
         disableNumTwoInput();
         enableNumOneInput();
+        enableDecimalButton();
     } else if(num1 != "" && num2 == "") {
-        result = num1;
+        result = parseFloat(num1);
         num1 = "";
         operator = "";
         numberDisplay.textContent = result;
@@ -225,6 +226,21 @@ function inputDecimalButton() {
         numberDisplay.textContent += "."; 
         num2 += ".";
         disableDecimalButton();   
+    } else if(equalsIsClicked == true) {
+        numberDisplay.textContent = "0.";
+        operatorDisplay.textContent = "";
+        num1 = "0."
+        equalsIsClicked = false;
+        disableDecimalButton();
+    } else if(num1 != "" && num2 == "") {
+        numberDisplay.textContent = "0.";
+        operatorDisplay.textContent = "";
+        num1 = "0.";
+        operator = "";
+        operatorIsClicked = false;
+        disableNumTwoInput();
+        enableNumOneInput();
+        disableDecimalButton();
     } else {
         numberDisplay.textContent += ".";
         num1 += ".";
