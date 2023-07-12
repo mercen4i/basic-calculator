@@ -164,10 +164,12 @@ function inputEquals() {
         disableNumTwoInput();
         enableNumOneInput();
     } else if(num1 != "" && num2 == "") {
-        num1 = result;
+        result = num1;
+        num1 = "";
         operator = "";
-        numberDisplay.textContent = num1;
+        numberDisplay.textContent = result;
         operatorDisplay.textContent = "=";
+        equalsIsClicked = true;
     } else if(equalsIsClicked == false) {
         result = operate(num1, num2, operator);
         numberDisplay.textContent = result;
