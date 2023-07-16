@@ -183,6 +183,7 @@ function inputEquals() {
         equalsIsClicked = true;
         disableNumTwoInput();
         enableNumOneInput();
+        enableDecimalButton();
     }
 }
 
@@ -231,15 +232,6 @@ function inputDecimalButton() {
         operatorDisplay.textContent = "";
         num1 = "0."
         equalsIsClicked = false;
-        disableDecimalButton();
-    } else if(num1 != "" && num2 == "") {
-        numberDisplay.textContent = "0.";
-        operatorDisplay.textContent = "";
-        num1 = "0.";
-        operator = "";
-        operatorIsClicked = false;
-        disableNumTwoInput();
-        enableNumOneInput();
         disableDecimalButton();
     } else {
         numberDisplay.textContent += ".";
