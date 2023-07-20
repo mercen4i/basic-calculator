@@ -29,6 +29,10 @@ function cube(num1) {
     return num1 * num1 * num1;
 }
 
+function squareRoot(num1) {
+    return Math.pow(num1, 1/2);
+}
+
 function inputNumOne(e) {
     if(operatorIsClicked == false && equalsIsClicked == true) {
         numberDisplay.textContent = "";
@@ -47,6 +51,7 @@ function inputNumOne(e) {
         enableOperatorInput();
         enableSquareButton();
         enableCubeButton();
+        enableSquareRootButton();
     }
 }
 
@@ -292,6 +297,28 @@ function disableCubeButton() {
     cubeButton.removeEventListener('click', inputCube);
 }
 
+function inputSquareRoot() {
+    if(numberIsClicked == true) {
+        num2 = squareRoot(num2);
+        numberDisplay.textContent = num2;
+    } else if(equalsIsClicked == true) {
+        result = squareRoot(result);
+        numberDisplay.textContent = result;
+    } else {
+        result = squareRoot(num1);
+        num1 = result;
+        numberDisplay.textContent = result;
+    }
+}
+
+function enableSquareRootButton() {
+    squareRootButton.addEventListener('click', inputSquareRoot);
+}
+
+function disableSquareRootButton() {
+    squareRootButton.removeEventListener('click', inputSquareRoot);
+}
+
 const display = document.querySelector('#display');
 const numberButtons = document.querySelectorAll('.button.number');
 const operatorButtons = document.querySelectorAll('.button.operator');
@@ -301,6 +328,7 @@ const answerButton = document.querySelector('#answer');
 const decimalButton = document.querySelector('#decimal');
 const squareButton = document.querySelector('#square');
 const cubeButton = document.querySelector('#cube');
+const squareRootButton = document.querySelector('#root');
 
 const numberDisplay = document.createElement('div');
 numberDisplay.classList.add('number-display');
