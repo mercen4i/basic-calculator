@@ -252,6 +252,9 @@ function inputSquare() {
     if(numberIsClicked == true) {
         num2 = square(num2);
         numberDisplay.textContent = num2;
+    } else if(equalsIsClicked == true) {
+        result = square(result);
+        numberDisplay.textContent = result;
     } else {
         result = square(num1);
         num1 = result;
@@ -271,6 +274,9 @@ function inputCube() {
     if(numberIsClicked == true) {
         num2 = cube(num2);
         numberDisplay.textContent = num2;
+    } else if(equalsIsClicked == true) {
+        result = cube(result);
+        numberDisplay.textContent = result;
     } else {
         result = cube(num1);
         num1 = result;
