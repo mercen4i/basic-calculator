@@ -52,6 +52,7 @@ function inputNumOne(e) {
         enableSquareButton();
         enableCubeButton();
         enableSquareRootButton();
+        enablePercentButton();
     }
 }
 
@@ -319,6 +320,28 @@ function disableSquareRootButton() {
     squareRootButton.removeEventListener('click', inputSquareRoot);
 }
 
+function inputPercentButton() {
+    if(numberIsClicked == true) {
+        num2 = num2/100;
+        numberDisplay.textContent = num2;
+    } else if(equalsIsClicked == true) {
+        result = result/100;
+        numberDisplay.textContent = result;
+    } else {
+        result = num1/100;
+        num1 = result;
+        numberDisplay.textContent = result;
+    }
+}
+
+function enablePercentButton() {
+    percentButton.addEventListener('click', inputPercentButton);
+}
+
+function disablePercentButton() {
+    percentButton.removeEventListener('click', inputPercentButton);
+}
+
 const display = document.querySelector('#display');
 const numberButtons = document.querySelectorAll('.button.number');
 const operatorButtons = document.querySelectorAll('.button.operator');
@@ -329,6 +352,7 @@ const decimalButton = document.querySelector('#decimal');
 const squareButton = document.querySelector('#square');
 const cubeButton = document.querySelector('#cube');
 const squareRootButton = document.querySelector('#root');
+const percentButton = document.querySelector('#percent');
 
 const numberDisplay = document.createElement('div');
 numberDisplay.classList.add('number-display');
